@@ -1,0 +1,22 @@
+class Person:
+    name: String
+    age: i32
+
+def create_person(name: String, age: i32) -> Person:
+    return Person { name: name, age: age }
+
+def main():
+    # Dynamic variables
+    greeting = "Welcome to Lingo"
+    println(greeting)
+
+    # Static typed variables
+    let x: i32 = 40
+    let y: i32 = 2
+    let sum: i32 = x + y
+    println("Static sum: " + sum)
+
+    # Struct instantiation
+    let p = Person { name: "Alice".to_string(), age: 30 }
+    println("Person name: " + p.name)
+    println("Person age: " + p.age)

@@ -1,0 +1,16 @@
+def main():
+    name = "World"
+    println("Hello, " + name + " from Lingo!")
+
+    a = 10
+    b = 20
+    c = a + b * 2
+    println("Math result: " + c)
+
+    numbers = [1, 2, 3, 4, 5]
+    println("List: " + numbers)
+
+    if c > 30:
+        println("c is greater than 30")
+    else:
+        println("c is smaller")

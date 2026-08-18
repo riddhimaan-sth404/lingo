@@ -1,0 +1,10 @@
+import std.collections.HashMap
+
+def main():
+    let mut map: HashMap<String, i32> = HashMap.new()
+    map.insert("apples".to_string(), 5)
+    map.insert("oranges".to_string(), 12)
+
+    println("Map keys processed:")
+    for key in map.keys():
+        println(key)
