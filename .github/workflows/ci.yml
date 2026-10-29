@@ -1,0 +1,53 @@
+name: Lingo CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-windows:
+    name: Test Windows (x86_64-pc-windows-msvc)
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install LLVM / Clang
+        run: |
+          winget install --id LLVM.LLVM -e --silent --accept-package-agreements --accept-source-agreements
+          echo "C:\Program Files\LLVM\bin" >> $env:GITHUB_PATH
+
+      - name: Run Cargo Workspace Tests
+        run: cargo test --workspace --verbose
+
+      - name: Build All Targets
+        run: cargo build --workspace --verbose
+
+      - name: Run Lingo Examples & Test Suite
+        run: .\run-all.bat
+
+  test-linux:
+    name: Test Linux (x86_64-unknown-linux-gnu)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Clang & LLVM
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang llvm lld
+
+      - name: Run Cargo Workspace Tests
+        run: cargo test --workspace --verbose
+
+      - name: Build All Targets
+        run: cargo build --workspace --verbose

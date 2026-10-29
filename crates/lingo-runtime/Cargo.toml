@@ -1,0 +1,10 @@
+[package]
+name = "lingo-runtime"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "lingo_runtime"
+crate-type = ["staticlib", "rlib"]
+
+[dependencies]

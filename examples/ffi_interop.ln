@@ -1,0 +1,11 @@
+# FFI calling native C ABI symbols
+extern def lingo_time_now_ms() -> int
+extern def lingo_sleep_ms(ms: int)
+
+def main():
+    println("--- Testing FFI & Foreign Function Declarations ---")
+    t1 = lingo_time_now_ms()
+    lingo_sleep_ms(30)
+    t2 = lingo_time_now_ms()
+    diff = t2 - t1
+    println("Native FFI duration: " + diff)

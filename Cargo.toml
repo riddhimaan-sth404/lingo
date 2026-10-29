@@ -1,18 +1,21 @@
 [workspace]
+resolver = "2"
 members = [
-    ".",
-    "crates/lingo_runtime",
+    "crates/lingo-source",
+    "crates/lingo-diagnostics",
+    "crates/lingo-ast",
+    "crates/lingo-lexer",
+    "crates/lingo-parser",
+    "crates/lingo-resolve",
+    "crates/lingo-types",
+    "crates/lingo-ir",
+    "crates/lingo-codegen-llvm",
+    "crates/lingo-runtime",
+    "crates/lingo-driver",
+    "crates/lingo-bridge",
+    "crates/lingo-pkg",
+    "crates/lingo-fmt",
+    "crates/lingo-lsp",
+    "crates/lingo-cli",
 ]
-exclude = [
-    "target/lingo_run",
-]
-
-[package]
-name = "lingo"
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-lingo_runtime = { path = "crates/lingo_runtime" }
-clap = { version = "4.5", features = ["derive"] }
-
+default-members = ["crates/lingo-cli"]

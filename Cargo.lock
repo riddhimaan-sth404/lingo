@@ -115,12 +115,131 @@ name = "lingo"
 version = "0.1.0"
 dependencies = [
  "clap",
- "lingo_runtime",
+ "lingo-driver",
+ "lingo-fmt",
+ "lingo-lsp",
+ "lingo-pkg",
 ]
 
 [[package]]
-name = "lingo_runtime"
+name = "lingo-ast"
 version = "0.1.0"
+dependencies = [
+ "lingo-source",
+]
+
+[[package]]
+name = "lingo-bridge"
+version = "0.1.0"
+
+[[package]]
+name = "lingo-codegen-llvm"
+version = "0.1.0"
+dependencies = [
+ "lingo-ast",
+ "lingo-ir",
+ "lingo-source",
+ "lingo-types",
+]
+
+[[package]]
+name = "lingo-diagnostics"
+version = "0.1.0"
+dependencies = [
+ "lingo-source",
+]
+
+[[package]]
+name = "lingo-driver"
+version = "0.1.0"
+dependencies = [
+ "lingo-ast",
+ "lingo-codegen-llvm",
+ "lingo-diagnostics",
+ "lingo-ir",
+ "lingo-lexer",
+ "lingo-parser",
+ "lingo-resolve",
+ "lingo-runtime",
+ "lingo-source",
+ "lingo-types",
+]
+
+[[package]]
+name = "lingo-fmt"
+version = "0.1.0"
+dependencies = [
+ "lingo-lexer",
+ "lingo-source",
+]
+
+[[package]]
+name = "lingo-ir"
+version = "0.1.0"
+dependencies = [
+ "lingo-ast",
+ "lingo-source",
+ "lingo-types",
+]
+
+[[package]]
+name = "lingo-lexer"
+version = "0.1.0"
+dependencies = [
+ "lingo-diagnostics",
+ "lingo-source",
+]
+
+[[package]]
+name = "lingo-lsp"
+version = "0.1.0"
+dependencies = [
+ "lingo-diagnostics",
+ "lingo-lexer",
+ "lingo-parser",
+ "lingo-source",
+]
+
+[[package]]
+name = "lingo-parser"
+version = "0.1.0"
+dependencies = [
+ "lingo-ast",
+ "lingo-diagnostics",
+ "lingo-lexer",
+ "lingo-source",
+]
+
+[[package]]
+name = "lingo-pkg"
+version = "0.1.0"
+
+[[package]]
+name = "lingo-resolve"
+version = "0.1.0"
+dependencies = [
+ "lingo-ast",
+ "lingo-diagnostics",
+ "lingo-source",
+]
+
+[[package]]
+name = "lingo-runtime"
+version = "0.1.0"
+
+[[package]]
+name = "lingo-source"
+version = "0.1.0"
+
+[[package]]
+name = "lingo-types"
+version = "0.1.0"
+dependencies = [
+ "lingo-ast",
+ "lingo-diagnostics",
+ "lingo-resolve",
+ "lingo-source",
+]
 
 [[package]]
 name = "once_cell_polyfill"

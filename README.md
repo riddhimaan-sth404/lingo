@@ -1,84 +1,114 @@
 # Lingo (`.ln`)
 
-**Lingo** is a modern programming language combining Rust's memory safety, speed, and features with Python's clean syntax and dynamic typing flexibility.
-
-## Features
-
-- 🐍 **Python-like Syntax:** Semantic indentation (off-side rule) for clean block structure.
-- ⚡ **No GC Memory Safety:** Dynamic objects use reference counting (`Rc<RefCell<...>>`) to adhere to Rust's compile-time borrow checker with zero runtime garbage collection pauses.
-- 🔀 **Dynamic by Default + Static Hints:** Unannotated variables default to dynamic runtime values (`Value`). Adding type hints (e.g. `x: i32`) opts directly into zero-cost native Rust types.
-- 📦 **Seamless `crates.io` Interop:** Import standard library modules or third-party Cargo crates natively (`import std.collections.HashMap`).
-- 🔄 **Bootstrapped Transpiler Architecture:** Implemented in Rust, transpiling `.ln` source code into idiomatic Rust code (`.rs`) compiled via `cargo`.
+**Lingo** is a statically compiled programming language combining the approachable, clean syntax of Python with native compilation performance through LLVM, low runtime overhead, and strong memory-safety foundations without a tracing garbage collector.
 
 ---
 
-## Quick Start
+## 🚀 Key Architectural Features (Phases 1 to 5)
 
-### Installation & Prerequisites
-Requires a working Rust toolchain (`rustc` and `cargo`).
+- 🐍 **Python-Inspired Indentation:** Semantic indentation (off-side rule) with structured layout tracking.
+- ⚡ **Native Ahead-Of-Time (AOT) Compilation via LLVM:** Independent compiler lowering Lingo AST -> High-Level IR (HIR) -> Constant-folding Optimizer -> Verified LLVM IR -> Standalone Native Executables (`.exe` on Windows, ELF on Linux).
+- 🔀 **Dynamic Typing by Default + Explicit Type Constraints:** Variables without annotations are dynamically typed values (`LingoValue`), while variables declared with `let x: i64` enforce strict compile-time type checking.
+- 🛡️ **Zero Tracing Garbage Collection:** Memory safety achieved through deterministic ownership, reference counting for dynamic heap entities, and RAII cleanup without stop-the-world GC pauses.
+- 🏗️ **Clean Modular Architecture:**
+  - `crates/lingo-source`: File management, source spans, and line-column mapping.
+  - `crates/lingo-diagnostics`: Rich compiler diagnostics with source line snippets and pointer carets.
+  - `crates/lingo-lexer`: Whitespace-aware tokenizer tracking indentation stacks (`Indent`, `Dedent`, `Newline`).
+  - `crates/lingo-ast`: Span-annotated Abstract Syntax Tree.
+  - `crates/lingo-parser`: Recursive-descent & Pratt expression parser with operator precedence.
+  - `crates/lingo-resolve`: Lexical scoping, symbol tables, and declaration checking.
+  - `crates/lingo-types`: Static & dynamic type system contract and constraint validation.
+  - `crates/lingo-ir`: High-level Control-Flow Graph (CFG) IR with constant-folding optimizations.
+  - `crates/lingo-codegen-llvm`: Target triple code generator emitting verified LLVM IR text (`.ll`).
+  - `crates/lingo-runtime`: Native C ABI runtime library managing tagged values, strings, lists, and I/O.
+  - `crates/lingo-driver`: Compilation orchestration, LLVM backend compilation, and native linking.
+  - `crates/lingo-cli`: Unified command-line interface (`lingo check`, `lingo build`, `lingo run`).
 
+---
+
+## 🛠️ Quick Start
+
+### Prerequisites
+- A working Rust toolchain (`rustc` and `cargo`).
+- LLVM toolchain (`clang` and `lld`).
+
+### Building the Compiler
 ```bash
-git clone https://github.com/riddhimaan-sth404/lingo.git
-cd lingo
 cargo build --release
 ```
 
 ### Running Examples
-
-Execute all sample programs using the batch runner:
-
+Run all sample programs using the batch runner:
 ```cmd
 run-all.bat
 ```
 
-Or run individual `.ln` files directly:
-
+Or run individual `.ln` source files directly:
 ```bash
 cargo run -- run examples/hello.ln
-cargo run -- run examples/rust_crates_and_types.ln
-cargo run -- run examples/crates_interop.ln
+cargo run -- run examples/functions_and_types.ln
+cargo run -- run examples/control_flow.ln
+```
+
+Or compile directly into a standalone binary:
+```bash
+cargo run -- build examples/hello.ln -o hello.exe
+.\hello.exe
 ```
 
 ---
 
-## Language Syntax Guide
+## 📖 Language Syntax Guide
 
-### Dynamic & Static Variables
+### Functions, Math & Loops
 ```python
-def main():
-    # Dynamic typing by default
-    greeting = "Hello from Lingo!"
-    println(greeting)
+def factorial(n):
+    result = 1
+    current = n
+    while current > 1:
+        result = result * current
+        current = current - 1
+    return result
 
-    # Static type hints
-    let x: i32 = 40
-    let y: i32 = 2
-    let sum: i32 = x + y
-    println("Static sum: " + sum)
+def main():
+    fact = factorial(5)
+    println("factorial(5) = " + fact)
 ```
 
-### Structs & Methods
+### Dynamic & Constrained Variables
 ```python
-class Person:
-    name: String
-    age: i32
-
 def main():
-    let p = Person { name: "Alice".to_string(), age: 30 }
-    println("Person name: " + p.name)
+    # Dynamic variable: can change runtime types
+    x = 100
+    println("x as int: " + x)
+    x = "Now x is a dynamic string!"
+    println("x as string: " + x)
+
+    # Statically constrained variable: rejected at compile time if mismatched
+    let count: i64 = 42
+    println("Static count: " + count)
 ```
 
-### Rust Ecosystem Interop
+### Conditionals & Lists
 ```python
-import std.collections.HashMap
-
 def main():
-    let mut map: HashMap<String, i32> = HashMap.new()
-    map.insert("apples".to_string(), 5)
-    map.insert("oranges".to_string(), 12)
+    items = [10, 20, 30, 40]
+    println("First element: " + items[0])
 
-    for key in map.keys():
-        println(key)
+    if items[0] > 5:
+        println("Greater than 5")
+    else:
+        println("Smaller")
+```
+
+---
+
+## 🧪 Testing
+
+Run all unit, integration, and compiler regression tests:
+```bash
+cargo test --workspace
+cargo test --test compile_tests
 ```
 
 ---

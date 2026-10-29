@@ -1,0 +1,20 @@
+def main():
+    println("--- Testing Concurrency & Channels ---")
+    ch = Channel()
+    channel_send(ch, "Message 1 from channel")
+    channel_send(ch, "Message 2 from channel")
+    channel_send(ch, 42)
+
+    msg1 = channel_recv(ch)
+    msg2 = channel_recv(ch)
+    msg3 = channel_recv(ch)
+
+    println("Received: " + msg1)
+    println("Received: " + msg2)
+    println("Received: " + msg3)
+
+    t1 = time_now_ms()
+    sleep_ms(50)
+    t2 = time_now_ms()
+    diff = t2 - t1
+    println("Time elapsed ms: " + diff)

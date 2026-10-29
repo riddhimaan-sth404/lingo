@@ -1,0 +1,27 @@
+[package]
+name = "lingo"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+lingo-driver = { path = "../lingo-driver" }
+lingo-pkg = { path = "../lingo-pkg" }
+lingo-fmt = { path = "../lingo-fmt" }
+lingo-lsp = { path = "../lingo-lsp" }
+clap = { version = "4.5", features = ["derive"] }
+
+[[test]]
+name = "compile_tests"
+path = "../../tests/compile_tests.rs"
+
+[[test]]
+name = "compile_pass_tests"
+path = "../../tests/compile_pass_tests.rs"
+
+[[test]]
+name = "compile_fail_tests"
+path = "../../tests/compile_fail_tests.rs"
+
+[[test]]
+name = "concurrency_tests"
+path = "../../tests/concurrency_tests.rs"

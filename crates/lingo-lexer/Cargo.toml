@@ -1,0 +1,8 @@
+[package]
+name = "lingo-lexer"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+lingo-source = { path = "../lingo-source" }
+lingo-diagnostics = { path = "../lingo-diagnostics" }

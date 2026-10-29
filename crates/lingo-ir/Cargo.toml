@@ -1,0 +1,9 @@
+[package]
+name = "lingo-ir"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+lingo-source = { path = "../lingo-source" }
+lingo-ast = { path = "../lingo-ast" }
+lingo-types = { path = "../lingo-types" }

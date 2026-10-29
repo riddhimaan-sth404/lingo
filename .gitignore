@@ -3,3 +3,9 @@
 *.tmp
 .idea/
 .vscode/
+*.exe
+*.ll
+*.pdb
+*.obj
+summary_report.txt
+temp_out.txt

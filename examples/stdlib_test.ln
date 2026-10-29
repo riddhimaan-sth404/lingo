@@ -1,0 +1,13 @@
+def main():
+    println("--- Testing Lingo Standard Library ---")
+    file_path = "temp_out.txt"
+    file_write(file_path, "Lingo Standard Library File I/O Success!")
+    
+    exists = file_exists(file_path)
+    println("File exists: " + exists)
+
+    content = file_read(file_path)
+    println("File content: " + content)
+
+    val = math_sqrt(144)
+    println("math_sqrt(144) = " + val)

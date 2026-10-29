@@ -1,0 +1,10 @@
+[package]
+name = "lingo-codegen-llvm"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+lingo-source = { path = "../lingo-source" }
+lingo-ast = { path = "../lingo-ast" }
+lingo-ir = { path = "../lingo-ir" }
+lingo-types = { path = "../lingo-types" }

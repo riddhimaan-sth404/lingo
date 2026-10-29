@@ -1,0 +1,33 @@
+def main():
+    println("--- Testing Maps and Collections ---")
+    data = {"lang": "Lingo", "version": 1}
+    println("Map initialized:")
+    println(data)
+
+    println("Access by key 'lang':")
+    println(data["lang"])
+
+    println("Mutate key 'version' and add 'status':")
+    data["version"] = 2
+    data["status"] = "Production Ready"
+    println(data)
+
+    println("Map length:")
+    println(len(data))
+
+    println("List and String lengths:")
+    items = [10, 20, 30, 40, 50]
+    println(len(items))
+    msg = "Native AOT"
+    println(len(msg))
+
+    println("String indexing:")
+    println(msg[0])
+
+    println("--- Testing Math Built-ins ---")
+    println(math_sqrt(144))
+    println(math_cos(0))
+    println(math_sin(0))
+    println(math_floor(42.8))
+    println(math_ceil(42.1))
+    println(math_abs(-99))

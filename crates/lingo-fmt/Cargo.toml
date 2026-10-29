@@ -1,0 +1,8 @@
+[package]
+name = "lingo-fmt"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+lingo-source = { path = "../lingo-source" }
+lingo-lexer = { path = "../lingo-lexer" }

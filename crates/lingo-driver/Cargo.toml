@@ -1,0 +1,16 @@
+[package]
+name = "lingo-driver"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+lingo-source = { path = "../lingo-source" }
+lingo-diagnostics = { path = "../lingo-diagnostics" }
+lingo-lexer = { path = "../lingo-lexer" }
+lingo-ast = { path = "../lingo-ast" }
+lingo-parser = { path = "../lingo-parser" }
+lingo-resolve = { path = "../lingo-resolve" }
+lingo-types = { path = "../lingo-types" }
+lingo-ir = { path = "../lingo-ir" }
+lingo-codegen-llvm = { path = "../lingo-codegen-llvm" }
+lingo-runtime = { path = "../lingo-runtime" }

@@ -1,0 +1,40 @@
+def compute_average(total, count):
+    if count == 0:
+        return 0
+    return total / count
+
+def main():
+    println("=== Lingo Real-World Data Processing Utility ===")
+    
+    # Generate and process numerical dataset
+    scores = [85, 92, 78, 96, 88, 74, 91, 83]
+    println("Input scores: " + scores)
+
+    count = 8
+    total = 0
+    max_score = 0
+    idx = 0
+
+    while idx < count:
+        current = scores[idx]
+        total = total + current
+        if current > max_score:
+            max_score = current
+        idx = idx + 1
+
+    avg = compute_average(total, count)
+
+    println("Record count: " + count)
+    println("Total score: " + total)
+    println("Highest score: " + max_score)
+    println("Calculated average: " + avg)
+
+    # Save summary report to disk
+    report_file = "summary_report.txt"
+    report_content = "Summary Report - Records: 8, Average: " + avg
+    file_write(report_file, report_content)
+
+    if file_exists(report_file):
+        println("Generated summary report: " + report_file)
+        readback = file_read(report_file)
+        println("Verified report: " + readback)

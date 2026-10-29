@@ -1,0 +1,10 @@
+[package]
+name = "lingo-lsp"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+lingo-source = { path = "../lingo-source" }
+lingo-lexer = { path = "../lingo-lexer" }
+lingo-parser = { path = "../lingo-parser" }
+lingo-diagnostics = { path = "../lingo-diagnostics" }

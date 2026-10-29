@@ -1,0 +1,21 @@
+def add(a, b):
+    return a + b
+
+def factorial(n):
+    result = 1
+    current = n
+    while current > 1:
+        result = result * current
+        current = current - 1
+    return result
+
+def main():
+    println("--- Testing Functions & Factorial ---")
+    sum = add(15, 27)
+    println("add(15, 27) = " + sum)
+
+    fact = factorial(5)
+    println("factorial(5) = " + fact)
+
+    let static_val: i64 = 100
+    println("Static typed let: " + static_val)
